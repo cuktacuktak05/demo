@@ -1,0 +1,7 @@
+{
+  "queries": 1000,
+  "queries_with_pii": 765,
+  "pii_residual_after_masking": 50,
+  "residual_rate": 0.06535947712418301,
+  "demask_roundtrip_exact": 1.0
+}
