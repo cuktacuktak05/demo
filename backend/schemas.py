@@ -19,3 +19,13 @@ class AskResponse(BaseModel):
     masked_input: str
     safety_notes: list[str]
     model: str
+
+
+class MaskTestRequest(BaseModel):
+    text: str = Field(min_length=1, max_length=5000)
+
+
+class MaskTestResponse(BaseModel):
+    original: str
+    masked: str
+    notes: list[str]

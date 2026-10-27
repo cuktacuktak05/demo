@@ -12,7 +12,7 @@ Prototype Python minh họa **RAG + Trust Layer** theo các ý tưởng trong b�
 - Đề cập prompt architecture, prompt templates, context grounding/dynamic grounding và Retrieval-Augmented Generation (RAG).
 
 ### Phần do demo đề xuất
-- FastAPI làm backend API và Streamlit làm giao diện.
+- FastAPI làm backend API; Streamlit và giao diện web tĩnh là hai lựa chọn giao diện.
 - TF-IDF làm bộ truy xuất đoạn văn bản local để giảm phụ thuộc hạ tầng.
 - Regex che một số mẫu email, số điện thoại và số định danh.
 - Kiểm tra đầu ra theo quy tắc từ khóa; audit log chỉ lưu metadata.
@@ -92,10 +92,11 @@ Kiểm tra:
 Mở PowerShell thứ hai, vào cùng thư mục dự án và kích hoạt `.venv`, sau đó:
 
 ```powershell
-streamlit run app.py
+streamlit run main.py
 ```
 
 Mở URL Streamlit hiển thị trong terminal, thường là http://localhost:8501.
+Ngoài ra, có thể mở giao diện web tại http://127.0.0.1:8000 sau khi khởi động backend.
 
 ## 4. Kịch bản demo đề xuất
 

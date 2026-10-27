@@ -526,8 +526,8 @@ async function handleSendMessage() {
         role: 'assistant',
         time: timeStr,
         text: data.answer,
-        citation: data.sources && data.sources.length > 0 
-          ? `${data.sources[0].source} - Trích xuất từ RAG Knowledge Base` 
+        citation: data.sources && data.sources.length > 0
+          ? `${data.sources[0].source} - Trích xuất từ RAG Knowledge Base`
           : 'Hệ thống quy chuẩn pháp luật Việt Nam'
       };
 
@@ -650,7 +650,7 @@ function showToast(message) {
 
 // Escape HTML
 function escapeHtml(str) {
-  return str.replace(/[&<>'"]/g, 
+  return str.replace(/[&<>'"]/g,
     tag => ({
       '&': '&amp;',
       '<': '&lt;',

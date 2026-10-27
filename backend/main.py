@@ -3,7 +3,8 @@ import json
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from .schemas import AskRequest, AskResponse, SourceItem
+from fastapi.staticfiles import StaticFiles
+from .schemas import AskRequest, AskResponse, SourceItem, MaskTestRequest, MaskTestResponse
 from .trust import mask_pii, check_role, check_output
 from .rag import retrieve
 from .llm import generate_answer
@@ -24,6 +25,8 @@ app.add_middleware(
 )
 
 LOG_PATH = Path(__file__).resolve().parent.parent / "audit.log"
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+
 
 def audit(event: dict):
     # Do not log raw prompts or generated answers; log minimal metadata only.
@@ -69,7 +72,26 @@ def ask(payload: AskRequest):
         model=model,
     )
 
-FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+@app.post("/mask-test", response_model=MaskTestResponse)
+def mask_test(payload: MaskTestRequest):
+    masked, notes = mask_pii(payload.text)
+    return MaskTestResponse(original=payload.text, masked=masked, notes=notes)
+
+@app.get("/audit")
+def get_audit(limit: int = 50):
+    if not LOG_PATH.exists():
+        return {"logs": [], "total": 0}
+    lines = LOG_PATH.read_text(encoding="utf-8").strip().splitlines()
+    logs = []
+    for line in reversed(lines):
+        if line.strip():
+            try:
+                logs.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+        if len(logs) >= limit:
+            break
+    return {"logs": logs, "total": len(lines)}
+
 if FRONTEND_DIR.exists():
-    from starlette.staticfiles import StaticFiles
     app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
