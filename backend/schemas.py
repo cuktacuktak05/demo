@@ -29,4 +29,3 @@ class MaskTestResponse(BaseModel):
     original: str
     masked: str
     notes: list[str]
-

@@ -3,11 +3,11 @@ from pathlib import Path
 from openai import OpenAI
 from dotenv import load_dotenv
 
-DOTENV_PATH = Path(__file__).resolve().parent.parent / ".env"
-load_dotenv(dotenv_path=DOTENV_PATH)
+ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
+load_dotenv(dotenv_path=ENV_PATH, override=True)
 
 def generate_answer(question: str, context_chunks: list[dict], role: str):
-    load_dotenv(dotenv_path=DOTENV_PATH, override=True)
+    load_dotenv(dotenv_path=ENV_PATH, override=True)
     api_key = os.getenv("OPENAI_API_KEY", "").strip()
     if not api_key or api_key == "replace_with_your_api_key":
         raise RuntimeError("Chưa cấu hình OPENAI_API_KEY trong file .env.")

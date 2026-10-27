@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luật AI - Trợ lý pháp lý AI của bạn</title>
+  <meta name="description" content="Trợ lý pháp lý AI hỗ trợ tra cứu điều luật, phân tích hợp đồng, giải thích quy định pháp luật và soạn thảo văn bản.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Mobile Hamburger Toggle -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Mở menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <!-- Brand Header -->
+      <div class="brand-header">
+        <div class="brand-logo">
+          <!-- Shield with scale of justice SVG -->
+          <svg class="shield-icon" viewBox="0 0 36 40" width="36" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 3L4 8.5V18.5C4 28 10 36.5 18 38.5C26 36.5 32 28 32 18.5V8.5L18 3Z" fill="url(#brand-shield-grad)" stroke="#22d3ee" stroke-width="1.6"/>
+            <line x1="18" y1="11" x2="18" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="14" y1="28" x2="22" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <line x1="10" y1="15" x2="26" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 15L7 21H13L10 15Z" stroke="#ffffff" stroke-width="1.3" fill="rgba(255,255,255,0.25)"/>
+            <path d="M26 15L23 21H29L26 15Z" stroke="#ffffff" stroke-width="1.3" fill="rgba(255,255,255,0.25)"/>
+            <defs>
+              <linearGradient id="brand-shield-grad" x1="18" y1="3" x2="18" y2="38.5" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0284c7"/>
+                <stop stop-color="#0d9488"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title">Luật AI</div>
+          <div class="brand-subtitle">Trợ lý pháp lý AI của bạn</div>
+        </div>
+      </div>
+
+      <!-- New Chat Button -->
+      <button class="btn-new-chat" id="btnNewChat">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <span>Cuộc trò chuyện mới</span>
+      </button>
+
+      <!-- History Header -->
+      <div class="section-header">
+        <span class="section-title">LỊCH SỬ TRÒ CHUYỆN</span>
+        <button class="btn-icon-ghost" id="btnSearchHistory" title="Tìm kiếm lịch sử">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+      </div>
+
+      <!-- Search Input (Expandable) -->
+      <div class="history-search-bar" id="historySearchBar" style="display: none;">
+        <input type="text" id="historySearchInput" placeholder="Tìm kiếm cuộc trò chuyện...">
+      </div>
+
+      <!-- Chat History List -->
+      <div class="history-list" id="historyList">
+        <div class="history-item active" data-chat-id="chat-1">
+          <div class="history-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div class="history-info">
+            <div class="history-title">Quy định nồng độ cồn khi lái...</div>
+            <div class="history-meta">Hôm nay</div>
+          </div>
+        </div>
+
+        <div class="history-item" data-chat-id="chat-2">
+          <div class="history-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div class="history-info">
+            <div class="history-title">Thủ tục đăng ký kinh doanh</div>
+            <div class="history-meta">Hôm qua</div>
+          </div>
+        </div>
+
+        <div class="history-item" data-chat-id="chat-3">
+          <div class="history-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div class="history-info">
+            <div class="history-title">Hợp đồng thuê mặt bằng</div>
+            <div class="history-meta">2 ngày trước</div>
+          </div>
+        </div>
+
+        <div class="history-item" data-chat-id="chat-4">
+          <div class="history-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div class="history-info">
+            <div class="history-title">Quy định về bảo hiểm xã hội</div>
+            <div class="history-meta">3 ngày trước</div>
+          </div>
+        </div>
+
+        <div class="history-item" data-chat-id="chat-5">
+          <div class="history-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <div class="history-info">
+            <div class="history-title">Tranh chấp hợp đồng lao động</div>
+            <div class="history-meta">5 ngày trước</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Navigation Links -->
+      <div class="sidebar-nav">
+        <a href="javascript:void(0)" class="nav-item" id="navLawLookup">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><circle cx="11" cy="14" r="3"></circle><line x1="13.2" y1="16.2" x2="16" y2="19"></line></svg>
+          <span>Tra cứu văn bản</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" id="navFaq">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span>Hỏi đáp pháp luật</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" id="navMyDocs">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          <span>Tài liệu của tôi</span>
+        </a>
+        <a href="javascript:void(0)" class="nav-item" id="navSettings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Cài đặt</span>
+        </a>
+      </div>
+
+      <!-- User Profile Card -->
+      <div class="user-profile-wrap">
+        <div class="user-profile" id="userProfileBtn">
+          <div class="user-avatar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div class="user-details">
+            <div class="user-name">Nguyễn Văn An</div>
+            <div class="user-tier">Gói Pro</div>
+          </div>
+          <div class="user-chevron">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </div>
+
+        <!-- User Dropdown Menu -->
+        <div class="user-dropdown" id="userDropdown" style="display: none;">
+          <div class="dropdown-item"><span>Thông tin tài khoản</span></div>
+          <div class="dropdown-item"><span>Nâng cấp Gói Doanh nghiệp</span></div>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-item text-danger"><span>Đăng xuất</span></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN CHAT & CONTENT AREA -->
+    <main class="main-content">
+      <!-- Top Action Bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <!-- Back or Breadcrumb placeholder if needed -->
+        </div>
+        <div class="top-bar-right">
+          <button class="btn-disclaimer" id="btnDisclaimerModal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+            <span>Tuyên bố miễn trừ</span>
+          </button>
+          <button class="btn-icon-circle" id="btnNotifications" title="Thông báo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="notification-badge"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Viewport -->
+      <div class="chat-scroll-container" id="chatScrollContainer">
+        <!-- Hero Title Section -->
+        <section class="hero-section" id="heroSection">
+          <h1 class="hero-title">Trợ lý pháp lý AI</h1>
+          <p class="hero-subtitle">Xin chào, Nguyễn Văn An! Hôm nay tôi có thể hỗ trợ gì cho bạn?</p>
+
+          <!-- 4 Quick Action Cards -->
+          <div class="quick-cards-grid">
+            <!-- Card 1 -->
+            <div class="quick-card" data-prompt="Tra cứu điều luật: Quy định về điều kiện thành lập công ty TNHH theo Luật Doanh nghiệp hiện hành">
+              <div class="card-icon-wrap icon-cyan">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+              </div>
+              <div class="card-text">
+                <div class="card-title">Tra cứu điều luật</div>
+                <div class="card-desc">Tìm kiếm và tra cứu điều luật, văn bản pháp luật</div>
+              </div>
+              <div class="card-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="quick-card" data-prompt="Phân tích hợp đồng: Những rủi ro pháp lý cần lưu ý trong hợp đồng thuê mặt bằng kinh doanh">
+              <div class="card-icon-wrap icon-teal">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              </div>
+              <div class="card-text">
+                <div class="card-title">Phân tích hợp đồng</div>
+                <div class="card-desc">Phân tích, kiểm tra và đánh giá hợp đồng</div>
+              </div>
+              <div class="card-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="quick-card" data-prompt="Giải thích quy định: Trình tự giải quyết tranh chấp hợp đồng lao động khi người lao động bị sa thải trái luật">
+              <div class="card-icon-wrap icon-indigo">
+                <!-- Scales of justice SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2"><path d="M12 3v17M6 7l6-4 6 4M6 7l-3 7h6l-3-7zM18 7l-3 7h6l-3-7zM5 21h14" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="card-text">
+                <div class="card-title">Giải thích quy định</div>
+                <div class="card-desc">Giải thích quy định pháp luật dễ hiểu, chi tiết</div>
+              </div>
+              <div class="card-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="quick-card" data-prompt="Soạn văn bản: Hướng dẫn mẫu biên bản họp hội đồng thành viên và thỏa thuận bảo mật NDA">
+              <div class="card-icon-wrap icon-emerald">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              </div>
+              <div class="card-text">
+                <div class="card-title">Soạn văn bản</div>
+                <div class="card-desc">Soạn thảo đơn từ, hợp đồng và văn bản pháp lý</div>
+              </div>
+              <div class="card-arrow">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Message Flow / Conversation List -->
+        <div class="conversation-container" id="conversationContainer">
+          <!-- Initial User Message -->
+          <div class="message-row user-row">
+            <div class="user-bubble-wrap">
+              <div class="user-bubble">
+                <div class="user-text">Theo quy định hiện hành, mức phạt nồng độ cồn khi lái xe ô tô là bao nhiêu?</div>
+                <div class="message-meta-right">
+                  <span class="message-time">10:24</span>
+                  <span class="read-ticks" title="Đã xem">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2.2" stroke-linecap="round"><polyline points="18 6 7 17 2 12"></polyline><polyline points="22 10 13 19 11 17"></polyline></svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="message-avatar user-avatar-badge">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+          </div>
+
+          <!-- Initial AI Response -->
+          <div class="message-row ai-row">
+            <div class="message-avatar ai-avatar-badge">
+              <!-- Shield scale icon matching reference -->
+              <svg class="chat-shield-icon" viewBox="0 0 36 40" width="36" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 3L4 8.5V18.5C4 28 10 36.5 18 38.5C26 36.5 32 28 32 18.5V8.5L18 3Z" fill="url(#ai-avatar-grad-init)" stroke="#22d3ee" stroke-width="1.6"/>
+                <line x1="18" y1="11" x2="18" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                <line x1="14" y1="28" x2="22" y2="28" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                <line x1="10" y1="15" x2="26" y2="15" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10 15L7 21H13L10 15Z" stroke="#ffffff" stroke-width="1.3" fill="rgba(255,255,255,0.25)"/>
+                <path d="M26 15L23 21H29L26 15Z" stroke="#ffffff" stroke-width="1.3" fill="rgba(255,255,255,0.25)"/>
+                <defs>
+                  <linearGradient id="ai-avatar-grad-init" x1="18" y1="3" x2="18" y2="38.5" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#0284c7" stop-opacity="0.9"/>
+                    <stop stop-color="#0d9488" stop-opacity="0.95"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+
+            <div class="ai-card">
+              <div class="ai-content">
+                <p>Theo quy định hiện hành tại Điều 5 Nghị định 100/2019/NĐ-CP (được sửa đổi, bổ sung bởi Nghị định 123/2021/NĐ-CP) về xử phạt vi phạm hành chính trong lĩnh vực giao thông đường bộ và đường sắt, mức phạt đối với người điều khiển ô tô vi phạm nồng độ cồn như sau:</p>
+
+                <ul class="legal-bullet-list">
+                  <li>Phạt tiền từ 6.000.000 đồng đến 8.000.000 đồng đối với nồng độ cồn trong máu hoặc hơi thở chưa vượt quá 50 mg/100 ml máu hoặc chưa vượt quá 0,25 mg/1 lít khí thở.</li>
+                  <li>Phạt tiền từ 16.000.000 đồng đến 18.000.000 đồng đối với nồng độ cồn trong máu hoặc hơi thở vượt quá 50 mg đến 80 mg/100 ml máu hoặc vượt quá 0,25 mg đến 0,4 mg/1 lít khí thở.</li>
+                  <li>Phạt tiền từ 30.000.000 đồng đến 40.000.000 đồng đối với nồng độ cồn trong máu hoặc hơi thở vượt quá 80 mg/100 ml máu hoặc vượt quá 0.4 mg/1 lít khí thở.</li>
+                </ul>
+
+                <p>Ngoài ra, người vi phạm còn có thể bị tước quyền sử dụng Giấy phép lái xe từ 10 đến 24 tháng tùy theo mức độ vi phạm.</p>
+                <div class="ai-time-tag">10:24</div>
+              </div>
+
+              <!-- Source Citation Card inside bubble -->
+              <div class="citation-box">
+                <div class="citation-left">
+                  <div class="citation-icon-badge">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                  </div>
+                  <div class="citation-text">
+                    <div class="citation-label">Nguồn trích dẫn</div>
+                    <div class="citation-value">Nghị định 100/2019/NĐ-CP (được sửa đổi, bổ sung bởi Nghị định 123/2021/NĐ-CP) – Điều 5</div>
+                  </div>
+                </div>
+
+                <div class="citation-actions">
+                  <button class="btn-copy-citation" title="Sao chép trích dẫn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>Sao chép</span>
+                  </button>
+                  <button class="btn-vote btn-like" title="Hữu ích">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
+                  </button>
+                  <button class="btn-vote btn-dislike" title="Chưa chính xác">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-3"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Floating Input Area -->
+      <footer class="bottom-action-area">
+        <div class="input-floating-bar">
+          <!-- Attachment Button -->
+          <button class="btn-input-tool" id="btnAttachment" title="Đính kèm tài liệu, hợp đồng">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+          </button>
+          <input type="file" id="fileInput" style="display: none;" accept=".pdf,.docx,.doc,.txt,.md">
+
+          <!-- Text Input -->
+          <input type="text" id="userInput" class="chat-input" placeholder="Nhập câu hỏi pháp lý của bạn..." autocomplete="off">
+
+          <!-- Prompt Magic Wand / Suggestions -->
+          <button class="btn-input-tool" id="btnPromptWand" title="Gợi ý câu hỏi thông minh">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M15 4V2m0 16v-2m8-6h-2M4 12H2m15.5-6.5l-1.4 1.4M6.9 17.1l-1.4 1.4m0-12.8l1.4 1.4m10.2 10.2l1.4 1.4"></path><path d="M12 8a4 4 0 1 0 4 4 4 4 0 0 0-4-4z"></path></svg>
+          </button>
+
+          <!-- Submit Button -->
+          <button class="btn-send" id="btnSend">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            <span>Gửi</span>
+          </button>
+        </div>
+
+        <!-- Disclaimer Footer -->
+        <div class="bottom-disclaimer">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <span>Kết quả trả lời chỉ mang tính tham khảo, không thay thế ý kiến tư vấn pháp lý từ luật sư.</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- MODAL: TUYÊN BỐ MIỄN TRỪ PHÁP LÝ -->
+  <div class="modal-backdrop" id="disclaimerModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+          </div>
+          <div>
+            <h3 class="modal-title">Tuyên bố miễn trừ trách nhiệm pháp lý</h3>
+            <div class="modal-subtitle">Hệ thống Trợ lý pháp lý Luật AI</div>
+          </div>
+        </div>
+        <button class="btn-modal-close" id="btnCloseDisclaimer">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="notice-callout">
+          <strong>Lưu ý quan trọng:</strong> Hệ thống hoạt động dựa trên mô hình ngôn ngữ lớn (GenAI) kết hợp công nghệ RAG truy xuất dữ liệu từ các văn bản quy phạm pháp luật Việt Nam.
+        </div>
+        <p>1. Toàn bộ câu trả lời, nhận định, trích dẫn quy định hoặc phân tích văn bản do <strong>Luật AI</strong> cung cấp chỉ mang tính chất thông tin tham khảo, hỗ trợ định hướng sơ bộ.</p>
+        <p>2. Dữ liệu pháp lý có thể thay đổi theo thời gian hoặc có các văn bản sửa đổi, bổ sung, hướng dẫn thi hành đặc thù theo từng địa phương và tình huống thực tế.</p>
+        <p>3. Trong các trường hợp tranh chấp pháp lý, thủ tục tố tụng hoặc giao kết các hợp đồng quan trọng, người dùng cần liên hệ trực tiếp với các Luật sư hoặc tổ chức hành nghề luật có chứng chỉ hợp pháp để được tư vấn chính xác.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="btnConfirmDisclaimer">Tôi đã hiểu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CÀI ĐẶT HỆ THỐNG -->
+  <div class="modal-backdrop" id="settingsModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">Cài đặt trợ lý pháp lý</h3>
+        <button class="btn-modal-close" id="btnCloseSettings">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-group">
+          <label class="setting-label">Vai trò truy vấn (Trust Layer)</label>
+          <select id="settingRole" class="setting-input">
+            <option value="employee" selected>Nhân viên (Cơ bản)</option>
+            <option value="admin">Quản trị viên (Toàn quyền)</option>
+          </select>
+          <div class="setting-hint">Mô phỏng phân quyền dữ liệu và áp dụng chính sách Trust Layer.</div>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label">Chế độ RAG (Truy xuất tài liệu Luật)</label>
+          <div class="toggle-wrap">
+            <input type="checkbox" id="settingRag" checked>
+            <label for="settingRag">Kích hoạt tra cứu ngữ cảnh văn bản pháp luật</label>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <label class="setting-label">Địa chỉ Backend API</label>
+          <input type="text" id="settingApiUrl" class="setting-input" value="http://127.0.0.1:8000">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="btnSaveSettings">Lưu cài đặt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-popup" id="toastPopup">Đã sao chép vào bộ nhớ tạm!</div>
+
+  <script src="app.js?v=3"></script>
+</body>
+</html>

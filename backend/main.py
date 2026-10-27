@@ -3,7 +3,6 @@ import json
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from .schemas import AskRequest, AskResponse, SourceItem, MaskTestRequest, MaskTestResponse
 from .trust import mask_pii, check_role, check_output
@@ -17,27 +16,17 @@ app = FastAPI(
     version="0.1.0",
     description="Educational demo: RAG + Trust Layer inspired by the cited research paper."
 )
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
 LOG_PATH = Path(__file__).resolve().parent.parent / "audit.log"
 FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 
-if FRONTEND_DIR.exists():
-    app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
-
-@app.get("/", include_in_schema=False)
-def serve_index():
-    index_path = FRONTEND_DIR / "index.html"
-    if index_path.exists():
-        return FileResponse(str(index_path))
-    return {"message": "Enterprise GenAI Assistant API running. Visit /docs for Swagger."}
 
 def audit(event: dict):
     # Do not log raw prompts or generated answers; log minimal metadata only.
@@ -103,3 +92,6 @@ def get_audit(limit: int = 50):
         if len(logs) >= limit:
             break
     return {"logs": logs, "total": len(lines)}
+
+if FRONTEND_DIR.exists():
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
