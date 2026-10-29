@@ -12,7 +12,7 @@ Prototype Python minh họa **RAG + Trust Layer** theo các ý tưởng trong b�
 - Đề cập prompt architecture, prompt templates, context grounding/dynamic grounding và Retrieval-Augmented Generation (RAG).
 
 ### Phần do demo đề xuất
-- FastAPI làm backend API; Streamlit và giao diện web tĩnh là hai lựa chọn giao diện.
+- FastAPI làm backend API, Vite làm frontend dev server.
 - TF-IDF làm bộ truy xuất đoạn văn bản local để giảm phụ thuộc hạ tầng.
 - Regex che một số mẫu email, số điện thoại và số định danh.
 - Kiểm tra đầu ra theo quy tắc từ khóa; audit log chỉ lưu metadata.
@@ -25,9 +25,10 @@ Prototype Python minh họa **RAG + Trust Layer** theo các ý tưởng trong b�
 ```text
 Người dùng
    |
-Streamlit UI (8501)
-   |
-FastAPI /ask (8000)
+Vite Dev Server (5173)  ←  Frontend (HTML/CSS/JS)
+   |  proxy /ask, /health, /audit, /mask-test
+   ↓
+FastAPI Backend (8000)
    |
    +--> Trust Layer: role check demo + PII masking
    |
@@ -44,14 +45,11 @@ Câu trả lời + nguồn RAG + ghi chú Trust Layer
 
 ## 3. Chạy trên Windows 10/11
 
-### Bước 1 — Cài Python
-Dùng Python 3.11 hoặc 3.12. Kiểm tra trong PowerShell:
+### Bước 1 — Cài Python & Node.js
+- Python 3.10+ (kiểm tra: `py --version`)
+- Node.js 18+ (kiểm tra: `node --version`)
 
-```powershell
-py --version
-```
-
-### Bước 2 — Giải nén và tạo môi trường ảo
+### Bước 2 — Tạo môi trường ảo Python và cài dependencies
 Mở PowerShell trong thư mục `enterprise_genai_demo`:
 
 ```powershell
@@ -66,41 +64,43 @@ Nếu PowerShell chặn kích hoạt môi trường ảo, có thể chạy:
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 ```
-Hoặc bỏ qua kích hoạt và dùng trực tiếp `.\.venv\Scripts\python.exe -m pip ...`.
 
-### Bước 3 — Cấu hình API key
+### Bước 3 — Cài dependencies Frontend
+```powershell
+cd frontend
+npm install
+cd ..
+```
+
+### Bước 4 — Cấu hình API key
 ```powershell
 Copy-Item .env.example .env
 notepad .env
 ```
 Thay `OPENAI_API_KEY` bằng API key của bạn. Có thể đổi `OPENAI_MODEL` sang model mà tài khoản API của bạn được cấp quyền. Nếu dùng endpoint OpenAI-compatible khác, đặt `OPENAI_BASE_URL`.
 
-Không commit file `.env` lên GitHub. ChatGPT Plus/Free không tự bao gồm API credit; API thường được tính phí riêng theo nhà cung cấp.
+Không commit file `.env` lên GitHub.
 
-### Bước 4 — Khởi động backend
-Trong PowerShell thứ nhất, ở thư mục gốc dự án:
-
+### Bước 5 — Khởi động Backend (Terminal 1)
 ```powershell
-python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
+.\.venv\Scripts\python.exe -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
 Kiểm tra:
 - Health: http://127.0.0.1:8000/health
 - Swagger: http://127.0.0.1:8000/docs
 
-### Bước 5 — Khởi động Streamlit
-Mở PowerShell thứ hai, vào cùng thư mục dự án và kích hoạt `.venv`, sau đó:
-
+### Bước 6 — Khởi động Frontend (Terminal 2)
 ```powershell
-streamlit run main.py
+cd frontend
+npm run dev
 ```
 
-Mở URL Streamlit hiển thị trong terminal, thường là http://localhost:8501.
-Ngoài ra, có thể mở giao diện web tại http://127.0.0.1:8000 sau khi khởi động backend.
+Mở URL hiển thị trong terminal, thường là http://localhost:5173
 
 ## 4. Kịch bản demo đề xuất
 
-1. Hỏi: “Trust Layer có vai trò gì trong kiến trúc GenAI doanh nghiệp?” Quan sát nguồn RAG.
+1. Hỏi: "Trust Layer có vai trò gì trong kiến trúc GenAI doanh nghiệp?" Quan sát nguồn RAG.
 2. Hỏi câu có email giả lập, ví dụ `Liên hệ demo@example.com về chính sách dữ liệu.` Quan sát đầu vào sau khi che PII.
 3. Tắt RAG và hỏi lại để thảo luận tác dụng của grounding.
 4. Mở `audit.log` để cho thấy chỉ metadata truy vấn được ghi, không ghi prompt thô.
@@ -121,14 +121,19 @@ Mở `/docs`, chọn `POST /ask`, bấm **Try it out**, nhập:
 
 ```text
 enterprise_genai_demo/
-├── app.py
 ├── backend/
 │   ├── __init__.py
-│   ├── main.py
+│   ├── main.py          ← FastAPI API thuần (không mount frontend)
 │   ├── schemas.py
 │   ├── rag.py
 │   ├── llm.py
 │   └── trust.py
+├── frontend/
+│   ├── package.json     ← npm project
+│   ├── vite.config.js   ← Vite dev server + proxy tới backend
+│   ├── index.html
+│   ├── app.js
+│   └── style.css
 ├── knowledge_base/
 │   ├── 01_paper_summary.md
 │   └── 02_demo_security_notes.md
