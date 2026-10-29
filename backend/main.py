@@ -3,7 +3,6 @@ import json
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from .schemas import AskRequest, AskResponse, SourceItem, MaskTestRequest, MaskTestResponse
 from .trust import mask_pii, check_role, check_output
 from .rag import retrieve
@@ -18,14 +17,17 @@ app = FastAPI(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+    ],
     allow_credentials=False,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
 
 LOG_PATH = Path(__file__).resolve().parent.parent / "audit.log"
-FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
 
 
 def audit(event: dict):
@@ -92,6 +94,3 @@ def get_audit(limit: int = 50):
         if len(logs) >= limit:
             break
     return {"logs": logs, "total": len(lines)}
-
-if FRONTEND_DIR.exists():
-    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")

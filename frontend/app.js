@@ -8,7 +8,7 @@ const state = {
   activeChatId: 'chat-1',
   role: 'employee',
   useRag: true,
-  apiBaseUrl: 'http://127.0.0.1:8000',
+  apiBaseUrl: '',
   chats: {
     'chat-1': {
       title: 'Quy định nồng độ cồn khi lái...',
