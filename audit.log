@@ -12,3 +12,20 @@
 {"event": "answer_generated", "role": "employee", "rag_enabled": true, "retrieved_chunks": 3, "pii_masked": false, "output_filtered": false, "model": "openrouter/free", "timestamp_utc": "2026-10-27T14:39:28.389339+00:00"}
 {"event": "answer_generated", "role": "employee", "rag_enabled": true, "retrieved_chunks": 3, "pii_masked": false, "output_filtered": false, "model": "openrouter/free", "timestamp_utc": "2026-10-28T09:31:47.578200+00:00"}
 {"event": "answer_generated", "role": "employee", "rag_enabled": true, "retrieved_chunks": 3, "pii_masked": false, "output_filtered": false, "model": "openrouter/free", "timestamp_utc": "2026-10-28T09:33:50.313752+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "kb", "retrieved_chunks": 1, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:14:35.101891+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "none", "retrieved_chunks": 0, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:14:35.112750+00:00"}
+{"event": "llm_config_error", "role": "employee", "timestamp_utc": "2026-11-11T10:14:35.124077+00:00"}
+{"event": "generation_error", "role": "employee", "error_type": "RuntimeError", "timestamp_utc": "2026-11-11T10:14:35.243522+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "none", "retrieved_chunks": 0, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:14:35.252962+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "kb", "retrieved_chunks": 1, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:01.774233+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "none", "retrieved_chunks": 0, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:01.786004+00:00"}
+{"event": "llm_config_error", "role": "employee", "timestamp_utc": "2026-11-11T10:15:01.796924+00:00"}
+{"event": "generation_error", "role": "employee", "error_type": "RuntimeError", "timestamp_utc": "2026-11-11T10:15:01.834396+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "none", "retrieved_chunks": 0, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:01.845527+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": false, "source_type": "none", "retrieved_chunks": 0, "pii_masked": true, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:01.924631+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "kb", "retrieved_chunks": 1, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:26.625184+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "none", "retrieved_chunks": 0, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:26.638095+00:00"}
+{"event": "llm_config_error", "role": "employee", "timestamp_utc": "2026-11-11T10:15:26.649606+00:00"}
+{"event": "generation_error", "role": "employee", "error_type": "RuntimeError", "timestamp_utc": "2026-11-11T10:15:26.687460+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": true, "source_type": "none", "retrieved_chunks": 0, "pii_masked": false, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:26.698114+00:00"}
+{"event": "answer_generated", "role": "employee", "rag_enabled": false, "source_type": "none", "retrieved_chunks": 0, "pii_masked": true, "output_filtered": false, "model": "mock-model", "timestamp_utc": "2026-11-11T10:15:26.778185+00:00"}
