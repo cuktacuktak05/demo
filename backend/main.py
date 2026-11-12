@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 import json
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from .schemas import (
     AskRequest,
@@ -51,6 +51,11 @@ def audit(event: dict):
     event["timestamp_utc"] = datetime.now(timezone.utc).isoformat()
     with LOG_PATH.open("a", encoding="utf-8") as f:
         f.write(json.dumps(event, ensure_ascii=False) + "\n")
+
+
+@app.get("/", include_in_schema=False)
+def root():
+    return RedirectResponse(url="/docs")
 
 
 @app.get("/health", response_model=HealthResponse)
@@ -118,6 +123,14 @@ def ask(payload: AskRequest):
                 source=c["source"],
                 snippet=c["text"][:500],
                 score=round(c["score"], 4),
+                chunk_id=c.get("chunk_id", c["source"]),
+                document_id=c.get("document_id"),
+                article=c.get("article"),
+                effective_from=c.get("effective_from"),
+                effective_to=c.get("effective_to"),
+                legal_status=c.get("legal_status"),
+                retrieval_method=c.get("retrieval_method"),
+                citation=c.get("citation"),
             )
             for c in chunks
         ]
@@ -128,11 +141,21 @@ def ask(payload: AskRequest):
         top_score = None
         if is_general_knowledge_allowed():
             warnings.append("Thông tin tham khảo chung, không trích từ tài liệu")
+        elif payload.use_rag:
+            warnings.append("Không đủ ngữ cảnh phù hợp từ tài liệu (insufficient_context)")
+
+    retrieval_status = getattr(
+        chunks, "status", "insufficient_context" if payload.use_rag and not chunks else "relevant"
+    )
+    retrieval_method = getattr(chunks, "method", "hybrid")
+    retrieval_thresh = getattr(chunks, "threshold", threshold)
 
     retrieval_meta = RetrievalInfo(
         top_score=top_score,
-        threshold=threshold,
+        threshold=retrieval_thresh,
         n_chunks=len(chunks),
+        status=retrieval_status,
+        method=retrieval_method,
     )
 
     audit({

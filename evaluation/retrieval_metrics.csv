@@ -1,0 +1,5 @@
+Method,Calibrated_Threshold,Precision@1,Precision@3,Recall@3,MRR,nDCG@3,Abstain_Accuracy,Abstain_Precision,Abstain_Recall,Abstain_F1,Latency_Mean_ms,Latency_P50_ms,Latency_P95_ms
+TF-IDF (Baseline),0.15,0.7895,0.2807,0.7368,0.7895,0.7488,0.7879,0.7692,0.7143,0.7407,20.53,20.76,22.94
+BM25,10.0,0.8947,0.3509,0.9474,0.9474,0.9279,0.6364,1.0,0.1429,0.25,23.75,23.62,25.95
+Embedding (Semantic),0.4,0.8947,0.3158,0.8684,0.9211,0.8669,0.7879,0.8889,0.5714,0.6957,56.96,55.71,64.13
+Hybrid (BM25+Dense),0.03,0.9474,0.3509,0.9474,0.9737,0.9399,0.7273,1.0,0.3571,0.5263,82.32,81.28,92.77

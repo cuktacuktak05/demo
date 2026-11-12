@@ -13,6 +13,14 @@ class CitationItem(BaseModel):
     source: str
     snippet: str
     score: float
+    chunk_id: Optional[str] = None
+    document_id: Optional[str] = None
+    article: Optional[str] = None
+    effective_from: Optional[str] = None
+    effective_to: Optional[str] = None
+    legal_status: Optional[str] = None
+    retrieval_method: Optional[str] = None
+    citation: Optional[str] = None
 
 
 class SourceItem(BaseModel):
@@ -24,6 +32,8 @@ class RetrievalInfo(BaseModel):
     top_score: Optional[float] = None
     threshold: float
     n_chunks: int
+    status: Optional[str] = "relevant"
+    method: Optional[str] = "hybrid"
 
 
 class AskResponse(BaseModel):
