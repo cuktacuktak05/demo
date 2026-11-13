@@ -1,0 +1,332 @@
+[
+  {
+    "id": "Q01",
+    "query": "Mức phạt tiền và thời gian tước giấy phép lái xe đối với người điều khiển xe ô tô có nồng độ cồn vượt quá 80 mg/100 ml máu là bao nhiêu?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["03_domain.md#chunk-2"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Điều 5",
+    "description": "Câu hỏi trực tiếp về khung phạt nồng độ cồn mức 3 đối với xe ô tô theo Nghị định 100/2019/NĐ-CP."
+  },
+  {
+    "id": "Q02",
+    "query": "Hồ sơ đăng ký thành lập doanh nghiệp theo Luật Doanh nghiệp 2020 gồm những giấy tờ gì và nộp tại cơ quan nào?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["03_domain.md#chunk-3"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Thủ tục đăng ký doanh nghiệp",
+    "description": "Câu hỏi trực tiếp về hồ sơ và cơ quan tiếp nhận đăng ký doanh nghiệp."
+  },
+  {
+    "id": "Q03",
+    "query": "Các điều khoản trọng yếu cần có trong hợp đồng thuê mặt bằng kinh doanh theo Bộ luật Dân sự là gì?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["03_domain.md#chunk-4"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Hợp đồng thuê mặt bằng kinh doanh",
+    "description": "Câu hỏi trực tiếp về các điều khoản trọng yếu khi thuê mặt bằng thương mại."
+  },
+  {
+    "id": "Q04",
+    "query": "Tỷ lệ đóng bảo hiểm xã hội bắt buộc hàng tháng của người sử dụng lao động và người lao động trên quỹ tiền lương là bao nhiêu?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["03_domain.md#chunk-5"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Chế độ bảo hiểm xã hội bắt buộc",
+    "description": "Câu hỏi trực tiếp về tỷ lệ đóng BHXH bắt buộc 17.5% và 8%."
+  },
+  {
+    "id": "Q05",
+    "query": "Tranh chấp lao động cá nhân về việc bị sa thải trái pháp luật có bắt buộc phải qua hòa giải trước khi khởi kiện ra Tòa án không?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["03_domain.md#chunk-6"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Giải quyết tranh chấp hợp đồng lao động",
+    "description": "Câu hỏi trực tiếp về miễn thủ tục hòa giải khi bị sa thải theo BLLĐ 2019."
+  },
+  {
+    "id": "Q06",
+    "query": "Ba lĩnh vực khuyến nghị tích hợp GenAI vào nền tảng doanh nghiệp trong bài báo của Salesforce gồm những lĩnh vực nào?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["01_paper_summary.md#chunk-3"],
+    "expected_documents": ["01_paper_summary.md"],
+    "expected_status": "relevant",
+    "article": "Ba lĩnh vực khuyến nghị",
+    "description": "Câu hỏi trực tiếp về Platform Capability, Platform Architecture và Platform Governance."
+  },
+  {
+    "id": "Q07",
+    "query": "Theo tài liệu ghi chú an toàn demo, những thông tin gì được phép ghi lại trong audit log?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["02_demo_security_notes.md#chunk-3"],
+    "expected_documents": ["02_demo_security_notes.md"],
+    "expected_status": "relevant",
+    "article": "Ghi chú bảo mật demo",
+    "description": "Câu hỏi trực tiếp về quy định chỉ ghi metadata tối thiểu trong audit log."
+  },
+  {
+    "id": "Q08",
+    "query": "Dự thảo Luật Giao thông đường bộ 2018 quy định như thế nào về thời gian làm việc của người lái xe ô tô và thời gian nghỉ giữa 2 lần lái xe liên tục?",
+    "category": "in_domain_direct",
+    "expected_chunk_ids": ["04_luat_giao_thong.md#chunk-179", "04_luat_giao_thong.md#chunk-180"],
+    "expected_documents": ["04_luat_giao_thong.md"],
+    "expected_status": "relevant",
+    "article": "Điều 65",
+    "description": "Câu hỏi trực tiếp về Điều 65 thời gian làm việc lái xe trong dự thảo luật."
+  },
+  {
+    "id": "Q09",
+    "query": "Lái xe hơi sau khi uống bia rượu thì bị tước bằng lái xe bao lâu và đóng phạt mấy triệu?",
+    "category": "paraphrased",
+    "expected_chunk_ids": ["03_domain.md#chunk-2"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Điều 5",
+    "description": "Diễn đạt đời thường (xe hơi, bia rượu, đóng phạt) tương đương với xử phạt vi phạm nồng độ cồn ô tô."
+  },
+  {
+    "id": "Q10",
+    "query": "Mở công ty mới thì cần chuẩn bị giấy tờ gì, nộp qua mạng được không và bao nhiêu ngày có kết quả?",
+    "category": "paraphrased",
+    "expected_chunk_ids": ["03_domain.md#chunk-3"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Thủ tục đăng ký doanh nghiệp",
+    "description": "Diễn đạt đời thường (mở công ty mới, nộp qua mạng, có kết quả) tương đương thủ tục đăng ký thành lập doanh nghiệp."
+  },
+  {
+    "id": "Q11",
+    "query": "Tiền cọc thuê nhà làm cửa hàng kinh doanh thường mấy tháng và cần lưu ý gì để không bị phạt vi phạm cọc?",
+    "category": "paraphrased",
+    "expected_chunk_ids": ["03_domain.md#chunk-4"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Hợp đồng thuê mặt bằng kinh doanh",
+    "description": "Diễn đạt thực tế (thuê nhà làm cửa hàng, phạt cọc) tương đương hợp đồng thuê mặt bằng kinh doanh."
+  },
+  {
+    "id": "Q12",
+    "query": "Công ty phải trích bao nhiêu phần trăm lương nhân viên để nộp quỹ hưu trí, tử tuất và thai sản?",
+    "category": "paraphrased",
+    "expected_chunk_ids": ["03_domain.md#chunk-5"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Chế độ bảo hiểm xã hội bắt buộc",
+    "description": "Diễn đạt chi tiết theo chế độ con tương đương tỷ lệ đóng bảo hiểm xã hội bắt buộc."
+  },
+  {
+    "id": "Q13",
+    "query": "Bị công ty cho nghỉ việc vô cớ thì tôi có thể gửi đơn kiện thẳng ra Tòa án được luôn không?",
+    "category": "paraphrased",
+    "expected_chunk_ids": ["03_domain.md#chunk-6"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Giải quyết tranh chấp hợp đồng lao động",
+    "description": "Diễn đạt đời thường (nghỉ việc vô cớ, gửi đơn kiện thẳng) tương đương giải quyết tranh chấp sa thải trái pháp luật."
+  },
+  {
+    "id": "Q14",
+    "query": "Dự thảo luật giao thông mới có bắt buộc mọi vị trí ngồi trên ô tô đều phải cài dây an toàn không?",
+    "category": "paraphrased",
+    "expected_chunk_ids": ["04_luat_giao_thong.md#chunk-39", "04_luat_giao_thong.md#chunk-40"],
+    "expected_documents": ["04_luat_giao_thong.md"],
+    "expected_status": "relevant",
+    "article": "Điều 9",
+    "description": "Diễn đạt thực tế (cài dây an toàn mọi vị trí trên ô tô) tương đương Điều 9 dự thảo Luật GTĐB."
+  },
+  {
+    "id": "Q15",
+    "query": "Thủ tục đăng ký kinh doanh hộ cá thể và số vốn pháp định tối thiểu để mở tiệm tạp hóa",
+    "category": "partial_info",
+    "expected_chunk_ids": ["03_domain.md#chunk-3"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Thủ tục đăng ký doanh nghiệp",
+    "description": "KB chỉ có đăng ký doanh nghiệp (công ty), không có quy định hộ kinh doanh cá thể hay vốn tiệm tạp hóa; thông tin chỉ có một phần."
+  },
+  {
+    "id": "Q16",
+    "query": "Mức bồi thường tai nạn lao động cụ thể bằng bao nhiêu tháng lương khi bị suy giảm 31% khả năng lao động?",
+    "category": "partial_info",
+    "expected_chunk_ids": ["03_domain.md#chunk-5"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Chế độ bảo hiểm xã hội bắt buộc",
+    "description": "KB chỉ nêu có chế độ tai nạn lao động 0.5% và danh mục 5 chế độ, không có bảng biểu mức bồi thường chi tiết theo % suy giảm."
+  },
+  {
+    "id": "Q17",
+    "query": "Bên thuê mặt bằng kinh doanh tự ý đập tường sửa chữa làm sập nhà thì mức phạt hợp đồng tối đa theo luật là bao nhiêu phần trăm?",
+    "category": "partial_info",
+    "expected_chunk_ids": ["03_domain.md#chunk-4"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Hợp đồng thuê mặt bằng kinh doanh",
+    "description": "KB chỉ ghi nhận điều khoản trách nhiệm sửa chữa cải tạo và phạt cọc, không có trần phần trăm phạt vi phạm hợp đồng thương mại."
+  },
+  {
+    "id": "Q18",
+    "query": "Mức phạt nồng độ cồn khi đi xe máy điện trên đường phố Việt Nam",
+    "category": "partial_info",
+    "expected_chunk_ids": ["03_domain.md#chunk-2"],
+    "expected_documents": ["03_domain.md"],
+    "expected_status": "relevant",
+    "article": "Điều 5",
+    "description": "KB chỉ có khung phạt đối với người điều khiển xe ô tô, không có bảng phạt chi tiết cho xe máy điện."
+  },
+  {
+    "id": "Q19",
+    "query": "Quy trình sát hạch và điều kiện cấp giấy phép lái xe quốc tế cho người nước ngoài tại Việt Nam",
+    "category": "partial_info",
+    "expected_chunk_ids": ["04_luat_giao_thong.md#chunk-160", "04_luat_giao_thong.md#chunk-162"],
+    "expected_documents": ["04_luat_giao_thong.md"],
+    "expected_status": "relevant",
+    "article": "Điều 59",
+    "description": "Dự thảo có nhắc đến bổ sung thẩm quyền cấp GPLX quốc tế nhưng không có quy trình sát hạch chi tiết."
+  },
+  {
+    "id": "Q20",
+    "query": "Thủ tục nộp đơn ly hôn đơn phương tại Tòa án nhân dân cấp huyện cần những giấy tờ gì?",
+    "category": "out_of_kb_legal",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi pháp lý thuộc Luật Hôn nhân và Gia đình, hoàn toàn không có trong cơ sở tri thức hiện tại."
+  },
+  {
+    "id": "Q21",
+    "query": "Điều kiện và diện tích tối thiểu để được cấp sổ đỏ lần đầu đối với đất nông nghiệp xen kẽ trong khu dân cư",
+    "category": "out_of_kb_legal",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi pháp lý thuộc Luật Đất đai, hoàn toàn không có tài liệu trong Knowledge Base."
+  },
+  {
+    "id": "Q22",
+    "query": "Mức thuế suất thuế giá trị gia tăng đối với dịch vụ phần mềm xuất khẩu ra nước ngoài là bao nhiêu?",
+    "category": "out_of_kb_legal",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi pháp lý thuộc Luật Thuế GTGT, không nằm trong cơ sở dữ liệu."
+  },
+  {
+    "id": "Q23",
+    "query": "Mức xử phạt hành chính đối với hành vi lấn chiếm vỉa hè để kinh doanh buôn bán hàng quán",
+    "category": "out_of_kb_legal",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi về xử phạt lấn chiếm vỉa hè đô thị, không có tài liệu quy định cụ thể trong KB."
+  },
+  {
+    "id": "Q24",
+    "query": "Thủ tục xin cấp giấy phép xây dựng nhà ở riêng lẻ đô thị từ 4 tầng trở lên gồm hồ sơ gì?",
+    "category": "out_of_kb_legal",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi pháp lý về cấp phép xây dựng đô thị, ngoài phạm vi các tài liệu hiện có."
+  },
+  {
+    "id": "Q25",
+    "query": "Cách nấu phở bò Hà Nội gia truyền nước dùng trong và thơm mùi quế hồi thảo quả",
+    "category": "out_of_domain",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi ẩm thực phi pháp lý, hệ thống bắt buộc phải từ chối truy xuất hoặc trả về insufficient_context."
+  },
+  {
+    "id": "Q26",
+    "query": "Dự báo thời tiết ngày mai ở khu vực miền Bắc có rét đậm rét hại hay không?",
+    "category": "out_of_domain",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi về khí tượng thời tiết, hoàn toàn ngoài miền tri thức."
+  },
+  {
+    "id": "Q27",
+    "query": "Tóm tắt kết quả trận đấu bóng đá giữa Real Madrid và Manchester City tại cúp C1 châu Âu",
+    "category": "out_of_domain",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi thể thao giải trí, ngoài miền pháp lý."
+  },
+  {
+    "id": "Q28",
+    "query": "Hướng dẫn cài đặt hệ điều hành Ubuntu 24.04 trên máy ảo VMware Workstation",
+    "category": "out_of_domain",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi kỹ thuật công nghệ thông tin nói chung, ngoài miền Knowledge Base."
+  },
+  {
+    "id": "Q29",
+    "query": "Giá vàng nhẫn trơn 9999 và vàng miếng SJC hôm nay tăng hay giảm bao nhiêu một lượng?",
+    "category": "out_of_domain",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Câu hỏi tài chính thị trường, không liên quan đến tài liệu pháp lý lưu trữ."
+  },
+  {
+    "id": "Q30",
+    "query": "Người uống rượu vang đi bộ qua đường có bị phạt tiền và tước giấy phép lái xe ô tô không?",
+    "category": "keyword_overlap_different_intent",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Chứa từ khóa gây nhiễu ('uống rượu', 'tước giấy phép lái xe ô tô') nhưng chủ thể là 'người đi bộ'. KB chỉ quy định nồng độ cồn cho người điều khiển xe ô tô. Hệ thống phải từ chối gán nhầm quy định ô tô cho người đi bộ."
+  },
+  {
+    "id": "Q31",
+    "query": "Doanh nghiệp lữ hành có được tổ chức tour du lịch bằng tàu vũ trụ đưa người lên thám hiểm sao Hỏa không?",
+    "category": "keyword_overlap_different_intent",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Chứa từ khóa 'doanh nghiệp' nhưng nội dung viễn tưởng không có căn cứ pháp lý trong tài liệu thành lập doanh nghiệp."
+  },
+  {
+    "id": "Q32",
+    "query": "Hợp đồng thuê xe ô tô tự lái đi du lịch có bắt buộc công chứng như hợp đồng thuê mặt bằng kinh doanh không?",
+    "category": "keyword_overlap_different_intent",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Chứa từ khóa 'thuê xe ô tô', 'hợp đồng thuê mặt bằng kinh doanh' nhưng hỏi về hợp đồng thuê động sản ô tô du lịch."
+  },
+  {
+    "id": "Q33",
+    "query": "Cầu thủ bóng đá nước ngoài thi đấu tại giải Ngoại hạng Anh có phải đóng bảo hiểm xã hội bắt buộc theo luật Việt Nam không?",
+    "category": "keyword_overlap_different_intent",
+    "expected_chunk_ids": [],
+    "expected_documents": [],
+    "expected_status": "insufficient_context",
+    "article": null,
+    "description": "Chứa từ khóa 'hợp đồng lao động', 'bảo hiểm xã hội bắt buộc' nhưng hỏi về cầu thủ ngoại tại nước ngoài."
+  }
+]
