@@ -1,0 +1,14 @@
+# Theme của giao diện. Nền chính sáng, sidebar xanh mực đậm (cần Streamlit >= 1.46).
+[theme]
+base = "light"
+primaryColor = "#0F766E"
+backgroundColor = "#F2F5F7"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#16243A"
+font = "sans serif"
+
+[theme.sidebar]
+backgroundColor = "#16243A"
+secondaryBackgroundColor = "#22344F"
+textColor = "#EAF0F6"
+primaryColor = "#F5B83D"
