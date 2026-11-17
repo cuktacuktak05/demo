@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trust Layer Security Demo — Luật AI</title>
+  <meta name="description" content="Trực tiếp kiểm thử các tính năng Trust Layer: Role Checking, PII Masking, Prompt Safety, Output Filtering.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=4">
+</head>
+<body class="demo-page-body">
+  <div class="demo-container">
+    <!-- Top Header -->
+    <header class="demo-header">
+      <div class="demo-header-left">
+        <a href="index.html" class="btn-back-chat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Quay lại Trò chuyện (Chat)</span>
+        </a>
+        <div class="demo-title-wrap">
+          <h1 class="demo-page-title">🛡️ Trust Layer Security Demo</h1>
+          <p class="demo-page-subtitle">Kiểm thử và xác thực thực tế 4 thành phần bảo mật của Trust Layer (Session 2)</p>
+        </div>
+      </div>
+      <div class="demo-header-right">
+        <span class="badge-status-live">● Backend Live: API v0.2.0</span>
+      </div>
+    </header>
+
+    <!-- Pipeline Visual Banner -->
+    <section class="pipeline-banner">
+      <div class="pipeline-title">QUY TRÌNH XỬ LÝ AN TOÀN TOÀN DIỆN (TRUST LAYER PIPELINE)</div>
+      <div class="pipeline-steps">
+        <div class="pipeline-step"><span class="step-num">1</span> Role Check</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step"><span class="step-num">2</span> PII Masking</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step"><span class="step-num">3</span> Prompt Safety</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step"><span class="step-num">4</span> RAG Retrieval</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step"><span class="step-num">5</span> LLM Gateway</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step"><span class="step-num">6</span> Output Filter</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step"><span class="step-num">7</span> Demasking</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-step step-log"><span class="step-num">8</span> Audit Log</div>
+      </div>
+    </section>
+
+    <!-- 4 Core Test Modules Grid -->
+    <div class="demo-grid">
+
+      <!-- ============================================================ -->
+      <!-- MODULE A: ROLE CHECKING -->
+      <!-- ============================================================ -->
+      <section class="demo-card card-role">
+        <div class="card-header">
+          <div class="card-badge badge-blue">Khu vực A</div>
+          <h2 class="card-title">Role Checking — Kiểm tra quyền truy cập</h2>
+        </div>
+        <p class="card-desc">Xác thực danh tính backend và kiểm soát phân quyền (RBAC). Người dùng không đủ quyền sẽ bị chặn với mã HTTP 403.</p>
+
+        <div class="demo-form-group">
+          <label class="demo-label" for="roleSelect">Chọn vai trò người dùng (User Role):</label>
+          <select id="roleSelect" class="demo-select">
+            <option value="user">user (Người dùng cơ bản)</option>
+            <option value="employee">employee (Nhân viên nội bộ)</option>
+            <option value="admin">admin (Quản trị viên toàn quyền)</option>
+            <option value="guest">guest (Không hợp lệ - Test từ chối)</option>
+          </select>
+        </div>
+
+        <div class="demo-form-group">
+          <label class="demo-label" for="actionSelect">Thao tác cần thực hiện (Action):</label>
+          <select id="actionSelect" class="demo-select">
+            <option value="access">access — Truy vấn thông thường</option>
+            <option value="admin_panel">admin_panel — Quản trị hệ thống (Chỉ Admin)</option>
+            <option value="view_audit">view_audit — Xem nhật ký bảo mật (Chỉ Admin)</option>
+            <option value="delete_data">delete_data — Xóa dữ liệu (Chỉ Admin)</option>
+          </select>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-action btn-teal" id="btnCheckRole">Kiểm tra quyền truy cập (Check Role)</button>
+          <button class="btn-action btn-outline" id="btnTestAdminEndpoint">Thử gọi API Quản trị (/admin/stats)</button>
+        </div>
+
+        <!-- Result Box -->
+        <div class="result-box" id="roleResultBox" style="display: none;">
+          <div class="result-header">
+            <span class="result-title">KẾT QUẢ KIỂM TRA ROLE</span>
+            <span class="status-pill" id="roleStatusPill">--</span>
+          </div>
+          <div class="result-body" id="roleResultMessage">--</div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- MODULE B: PII MASKING & DEMASKING -->
+      <!-- ============================================================ -->
+      <section class="demo-card card-pii">
+        <div class="card-header">
+          <div class="card-badge badge-amber">Khu vực B</div>
+          <h2 class="card-title">PII Masking — Che thông tin cá nhân</h2>
+        </div>
+        <p class="card-desc">Phát hiện và che tự động Email, Số điện thoại Việt Nam, CCCD 12 số, CMND 9 số bằng placeholder đánh số ([CCCD_1], [PHONE_1], [EMAIL_1]).</p>
+
+        <div class="preset-buttons">
+          <span class="preset-label">Mẫu kiểm thử:</span>
+          <button class="btn-preset" id="presetPiiStandard">Mẫu đầy đủ (Đề bài)</button>
+          <button class="btn-preset" id="presetPiiMulti">Nhiều Email & SĐT</button>
+          <button class="btn-preset" id="presetPiiCmnd">CMND 9 số</button>
+        </div>
+
+        <div class="demo-form-group">
+          <label class="demo-label" for="piiInputText">Nội dung văn bản chứa thông tin cá nhân:</label>
+          <textarea id="piiInputText" class="demo-textarea" rows="3" placeholder="Nhập văn bản cần phát hiện và che PII..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-action btn-teal" id="btnRunPiiMask">Run PII Detection & Masking</button>
+          <button class="btn-action btn-outline" id="btnRunDemask" disabled>Thử Demasking (Khôi phục PII)</button>
+        </div>
+
+        <!-- Result Box -->
+        <div class="result-box" id="piiResultBox" style="display: none;">
+          <div class="result-header">
+            <span class="result-title">KẾT QUẢ MASKING</span>
+            <span class="stats-badge" id="piiStatsBadge">0 PII phát hiện</span>
+          </div>
+          <div class="pii-split-view">
+            <div class="pii-view-col">
+              <div class="col-label">Dữ liệu gốc (Input):</div>
+              <div class="code-display" id="piiOriginalDisplay"></div>
+            </div>
+            <div class="pii-view-col">
+              <div class="col-label">Dữ liệu đã che (Masked Output):</div>
+              <div class="code-display highlighted-masked" id="piiMaskedDisplay"></div>
+            </div>
+          </div>
+          <div class="pii-meta-notes" id="piiNotesDisplay"></div>
+          <div class="mapping-table-wrap" id="mappingWrap" style="display: none;">
+            <div class="mapping-title">Bảng ánh xạ Demasking (Lưu an toàn tại Trust Layer, không gửi cho LLM):</div>
+            <pre class="mapping-json" id="mappingDisplay"></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- MODULE C: PROMPT SAFETY -->
+      <!-- ============================================================ -->
+      <section class="demo-card card-prompt">
+        <div class="card-header">
+          <div class="card-badge badge-rose">Khu vực C</div>
+          <h2 class="card-title">Prompt Safety — An toàn đầu vào</h2>
+        </div>
+        <p class="card-desc">Kiểm tra đa lớp nhận diện Prompt Injection, yêu cầu tiết lộ System Prompt, yêu cầu vượt qua bảo mật và vượt quyền.</p>
+
+        <div class="preset-buttons">
+          <span class="preset-label">Kịch bản tấn công:</span>
+          <button class="btn-preset preset-danger" id="presetInjection">Prompt Injection</button>
+          <button class="btn-preset preset-danger" id="presetExtractSystem">Tiết lộ System Prompt</button>
+          <button class="btn-preset preset-danger" id="presetBypass">Bypass Security</button>
+          <button class="btn-preset preset-safe" id="presetSafeLegal">Câu hỏi pháp lý an toàn</button>
+        </div>
+
+        <div class="demo-form-group">
+          <label class="demo-label" for="promptInput">Nội dung prompt cần kiểm thử:</label>
+          <textarea id="promptInput" class="demo-textarea" rows="3" placeholder="Nhập câu lệnh để kiểm tra độ an toàn..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-action btn-teal" id="btnCheckPromptSafety">Check Prompt Safety</button>
+        </div>
+
+        <!-- Result Box -->
+        <div class="result-box" id="promptResultBox" style="display: none;">
+          <div class="result-header">
+            <span class="result-title">KẾT QUẢ ĐÁNH GIÁ AN TOÀN PROMPT</span>
+            <div class="tags-group">
+              <span class="status-pill" id="promptStatusPill">--</span>
+              <span class="risk-pill" id="promptRiskPill">Risk: --</span>
+              <span class="action-pill" id="promptActionPill">Action: --</span>
+            </div>
+          </div>
+          <div class="result-body" id="promptReasonMessage">--</div>
+          <div class="categories-list" id="promptCategoriesList"></div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- MODULE D: OUTPUT FILTERING -->
+      <!-- ============================================================ -->
+      <section class="demo-card card-output">
+        <div class="card-header">
+          <div class="card-badge badge-purple">Khu vực D</div>
+          <h2 class="card-title">Output Filtering — Kiểm tra đầu ra</h2>
+        </div>
+        <p class="card-desc">Kiểm soát phản hồi của mô hình LLM trước khi trả về: phát hiện nội dung độc hại, vi phạm chính sách và rò rỉ dữ liệu nhạy cảm (API key, System prompt).</p>
+
+        <div class="preset-buttons">
+          <span class="preset-label">Mẫu phản hồi LLM:</span>
+          <button class="btn-preset preset-safe" id="presetOutputSafe">Phản hồi pháp lý hợp lệ</button>
+          <button class="btn-preset preset-danger" id="presetOutputHarmful">Nội dung bạo lực / nguy hiểm</button>
+          <button class="btn-preset preset-danger" id="presetOutputLeak">Rò rỉ OpenAI API key</button>
+        </div>
+
+        <div class="demo-form-group">
+          <label class="demo-label" for="outputInput">Nội dung phản hồi LLM cần kiểm tra:</label>
+          <textarea id="outputInput" class="demo-textarea" rows="3" placeholder="Nhập văn bản phản hồi của mô hình LLM..."></textarea>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn-action btn-teal" id="btnCheckOutput">Check Output Filtering</button>
+        </div>
+
+        <!-- Result Box -->
+        <div class="result-box" id="outputResultBox" style="display: none;">
+          <div class="result-header">
+            <span class="result-title">KẾT QUẢ OUTPUT FILTERING</span>
+            <span class="status-pill" id="outputStatusPill">--</span>
+          </div>
+          <div class="pii-split-view">
+            <div class="pii-view-col">
+              <div class="col-label">Kết quả LLM trước khi lọc (Raw Output):</div>
+              <div class="code-display" id="outputRawDisplay"></div>
+            </div>
+            <div class="pii-view-col">
+              <div class="col-label">Kết quả sau Filtering (Đến người dùng):</div>
+              <div class="code-display" id="outputFilteredDisplay"></div>
+            </div>
+          </div>
+          <div class="violations-box" id="outputViolationsBox" style="display: none;">
+            <div class="violations-title">Các vi phạm chính sách được phát hiện:</div>
+            <ul id="outputViolationsList"></ul>
+          </div>
+          <div class="filter-disclaimer">
+            ℹ️ <em>Ghi chú kiến trúc:</em> Bộ lọc đầu ra hiện áp dụng heuristic rule-based và regex. Chưa tích hợp mô hình toxicity/sentiment analysis chuyên dụng.
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="trust-demo.js?v=4"></script>
+</body>
+</html>
